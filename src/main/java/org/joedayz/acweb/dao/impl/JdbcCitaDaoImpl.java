@@ -133,4 +133,33 @@ public class JdbcCitaDaoImpl implements CitaDAO{
 		return cont;
 	}
 
+	public List<String> getListaHorariosOcupados(java.util.Date fecha) throws Exception {
+		PreparedStatement pstm = null;
+		Connection con = null;
+		ResultSet rs = null;
+		List<String> horariosOcupados = null;
+		
+		try {
+			horariosOcupados = new ArrayList<String>();
+			con =  daoSupport.getConnexion();
+			
+			String sql = "select a.horario "+
+							"from cita a "+
+							" where a.fecha = ?";
+			pstm = con.prepareStatement(sql);
+			pstm.setDate(1, new Date(fecha.getTime()));
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				horariosOcupados.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			rs.close();
+			pstm.close();
+			con.close();
+		}
+		return horariosOcupados;
+	}
+
 }

@@ -51,13 +51,13 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 			}
 		
 		} catch (Exception e) {
+			System.out.println("Error al Validar "+e);
+		} finally{
 			rs.close();
 			pstm.close();
-			System.out.println("Error al Validar "+e);
+			con.close();
 		}
 	
-		rs.close();
-		pstm.close();
 		return validado;
 	}
 	
@@ -91,13 +91,14 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 				usuarios.add(usuario);
 				}
 			
-			rs.close();
-			st.close();
 		} catch (Exception e) {
 			System.out.println("Error en el select de usuario "+e);
+		} finally{
 			rs.close();
 			st.close();
+			con.close();
 		}
+		
 		
 		return usuarios;
 		}
@@ -133,12 +134,11 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 	
 
 		resultado = pstm.executeUpdate();
-		pstm.close();
-		con.close();
-		
 		} catch (Exception e) {
 			System.out.println("Error en el select de usuario "+e);
+		} finally{
 			pstm.close();
+			con.close();
 			con.close();
 		}
 	

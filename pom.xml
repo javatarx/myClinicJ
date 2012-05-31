@@ -48,7 +48,7 @@
 	
   </dependencies>
   <build>
-    <finalName>02-servlets-jsp-servlet-2-solution</finalName>
+    <finalName>myClinic</finalName>
   </build>
   
    <properties>
