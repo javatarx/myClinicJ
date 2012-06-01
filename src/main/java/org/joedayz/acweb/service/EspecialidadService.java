@@ -18,4 +18,8 @@ public class EspecialidadService {
 	public List<BNEspecialidad> getEspecialidadesPorMedico(String idMedico) throws Exception{
 		return especialidadDAO.getEspecialidadPorMedico(idMedico);
 	}
+	
+	public BNEspecialidad getEspecialidadPorId(String idEspecialidad) throws Exception{
+		return especialidadDAO.getEspecialidadPorId(idEspecialidad);
+	}
 }

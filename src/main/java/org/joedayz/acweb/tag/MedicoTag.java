@@ -40,9 +40,11 @@ public class MedicoTag extends TagSupport{
 				salida.println("</option>");
 			}
 			salida.print("</select>");
+			System.out.println("MedicoTag.doEndTag()");
+			System.out.println("bien :)");
 			
 		} catch (Exception e) {
-			System.out.println("MedicoTag.doEndTag()");
+			e.printStackTrace();
 		}
 		
 		return EVAL_PAGE;

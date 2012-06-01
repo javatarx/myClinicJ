@@ -1,6 +1,7 @@
 package org.joedayz.acweb.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class BNUsuario implements Serializable{
 	
@@ -22,6 +23,10 @@ public class BNUsuario implements Serializable{
 	private char credentialsExpired;//bit
 	private char accountEnabled ;//bit
 	private String passwordHint;
+	
+	private Date fechaSesion;
+	
+	private Long coRol;
 	
 	private String deRol;
 	
@@ -133,8 +138,18 @@ public class BNUsuario implements Serializable{
 	}
 	public void setPasswordHint(String passwordHint) {
 		this.passwordHint = passwordHint;
-	} 
-	
-	
+	}
+	public Long getCoRol() {
+		return coRol;
+	}
+	public void setCoRol(Long coRol) {
+		this.coRol = coRol;
+	}
+	public Date getFechaSesion() {
+		return fechaSesion;
+	}
+	public void setFechaSesion(Date fechaSesion) {
+		this.fechaSesion = fechaSesion;
+	}
 	
 }

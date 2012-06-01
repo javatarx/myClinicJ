@@ -15,6 +15,10 @@ public class CitaService {
 		return citaDAO.getListaCitas();
 	}
 	
+	public List<BNCita> getListaCitasPorUsuario(String idUsuario) throws Exception{
+		return citaDAO.getListaCitasPorUsuario(idUsuario);
+	}
+	
 	public int registrarCita(BNCita cita) throws Exception{
 		return citaDAO.registrarCita(cita);
 	}

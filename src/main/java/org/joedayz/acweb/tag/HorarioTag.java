@@ -30,11 +30,11 @@ public class HorarioTag extends TagSupport{
 		JspWriter salida =  pageContext.getOut();
 		
 		try {
-			salida.print("<select id=\"horario\" name=\"horario\" >");
+			salida.print("<select id=\"idHorario\" name=\"idHorario\" >");
 			for (String hora : horarios) {
-				salida.print("<option value=");
+				salida.print("<option value='");
 				salida.print(hora);
-				salida.print(">");
+				salida.print("'>");
 				salida.print(hora);
 				salida.println("</option>");
 			}

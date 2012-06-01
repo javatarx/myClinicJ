@@ -1,6 +1,7 @@
 <%@page import="org.joedayz.acweb.domain.*" %>
 <%@page import="org.joedayz.acweb.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -45,13 +46,14 @@
 <c:when test="${not empty cita.usuario}">
 	<tr>
 		<td><c:out value="${c.count}"></c:out></td>
-		<td><c:out value="${cita.fecha}"></c:out></td>
+		<td><fmt:formatDate value="${cita.fecha}" pattern="dd-MM-yyyy"/>
+			 <c:out value="${cita.horario}"></c:out></td>
 		<td><c:out value="${cita.especialidad.deEspecialidad}"></c:out></td>
 		<td><c:out value="${cita.medico.deMedico}"></c:out></td>
 		<td><c:out value="${cita.usuario.nombres} ${cita.usuario.apellidos}"></c:out></td>
 		<td><c:out value="${cita.comentario}"></c:out></td>
-		<td align="center"><a href="#modificar" title="Modificar"><img src="images/iconos/modificar.png"/></a></td>
-	<td align="center"><a href="#eliminar" title="Eliminar"><img src="images/iconos/eliminar.png"/></a></td>
+		<td align="center"><img src="images/iconos/modificar.png" onclick="location.href='<c:url value="ServletCita?tipo=U&idCita=${cita.coCita}"/>'"/></td>
+		<td align="center"><img src="images/iconos/eliminar.png" onclick="location.href='<c:url value="ServletCita?tipo=E&idCita=${cita.coCita}"/>'"/></td>
 	</tr>
 </c:when>
 <c:otherwise>

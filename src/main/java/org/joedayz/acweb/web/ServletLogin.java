@@ -1,6 +1,7 @@
 package org.joedayz.acweb.web;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +37,7 @@ public class ServletLogin extends HttpServlet{
 		
 		try {
 			usuario=servicio.validarUsuario(usu,pass);
+			usuario.setFechaSesion(Calendar.getInstance().getTime());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

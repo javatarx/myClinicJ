@@ -31,7 +31,7 @@ public class EspecialidadesTag extends TagSupport{
 					salida.println("</option>");
 			}
 			salida.print("</select>");
-			
+			System.out.println("bien :)");
 		} catch (Exception e) {
 			System.out.println("EspecialidadesTag.doEndTag()");
 			e.printStackTrace();

@@ -4,7 +4,7 @@
 	<tlibversion>1.1.2</tlibversion>
 	<jspversion>2.0</jspversion>
 	<shortname>acweb</shortname>
-	<uri>/WEB-INF/tag/myClinic</uri>
+	<uri>/WEB-INF/tag/myClinic.tld</uri>
 	
 	<tag>
 		<name>ComboEspecialidades</name>

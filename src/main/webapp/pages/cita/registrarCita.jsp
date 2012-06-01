@@ -77,27 +77,22 @@
  
 	<script type="text/javascript">
 	$(function() {
-		$( "#fecha" ).datepicker({
-				dateFormat:"yy-mm-dd",
-				regional:"es",
-				showOn: "button",
-				buttonImage: "images/iconos/calendar.gif",
-				buttonImageOnly: true
-// 				changeMonth: true,
-// 				changeYear: true
-			});
-		
 		$("#fecha").change(function(){
 			datosHorario = "fecha="+$("#fecha").val();
 			$.ajax({
 				type	: "POST",
-				url		: "listaHorarios.jsp",
+				url		: "pages/cita/listaHorarios.jsp",
 				data	: datosHorario,
 				success	: function(data){
 					$("#horario").html(data);
 				},
 				error	: function(){
 					$("#horario").html("No se encontraron horarios disponibles");
+				},
+				statusCode: {
+				    404: function() {
+				      alert("page not found");
+				    }
 				}
 			});
 		});
@@ -105,13 +100,18 @@
 		$("#idEspecialidad").change(function(){
 			$.ajax({
 				type	: "POST",
-				url		: "listaMedicos.jsp",
+				url		: "pages/cita/listaMedicos.jsp",
 				data	: "idEspecialidad="+$("#idEspecialidad option:selected").val(),
 				success	: function(data){
 					$("#medico").html(data);
 				},
 				error	: function(){
 					$("#medico").html("No se encontraron medicos de esta especialidad");
+				},
+				statusCode: {
+				    404: function() {
+				      alert("page not found");
+				    }
 				}
 			});
 		});
@@ -119,17 +119,28 @@
 		$("#idEspecialidad").ready(function(){
 			$.ajax({
 				type	: "POST",
-				url		: "listaMedicos.jsp",
+				url		: "pages/cita/listaMedicos.jsp",
 				data	: "idEspecialidad="+$("#idEspecialidad option:selected").val(),
 				success	: function(data){
 					$("#medico").html(data);
 				},
 				error	: function(){
 					$("#medico").html("No se encontraron medicos de esta especialidad");
+				},
+				statusCode: {
+				    404: function() {
+				      alert("page not found");
+				    }
 				}
 			});
 		});
-		
+		$( "#fecha" ).datepicker({
+			dateFormat:"yy-mm-dd",
+			regional:"es",
+			showOn: "button",
+			buttonImage: "images/iconos/calendar.gif",
+			buttonImageOnly: true
+		});
 	});
 	
 	</script>

@@ -112,6 +112,7 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 		PreparedStatement pstm = null;
 		
 		try {
+		Long id = GeneradorId.getId("usuario", "co_user");
 		con = daoSupport.getConnexion();
 		
 		sql = "insert into USUARIO(CO_USER ,USERNAME  ,NOMBRES ,APELLIDOS ,ST_USUARIO," +
@@ -119,7 +120,7 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 
 		pstm = con.prepareStatement(sql);
 		
-		pstm.setLong(1, GeneradorId.getId("usuario", "co_user"));
+		pstm.setLong(1, id);
 		pstm.setString(2, usuario.getUserName());	
 		pstm.setString(3, usuario.getNombres());
 		pstm.setString(4, usuario.getApellidos());
@@ -131,9 +132,20 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 		pstm.setLong(10, usuario.getDocumento());
 		pstm.setString(11, usuario.getPassword());
 		pstm.setString(12, usuario.getEmail());
-	
 
 		resultado = pstm.executeUpdate();
+		
+		//añadiendo el rol
+		sql = "insert into usuario_role (co_role_user,co_role,co_user,st_role_user) "+
+				" values(?,?,?,?)";
+		pstm = con.prepareStatement(sql);
+		pstm.setLong(1, GeneradorId.getId("usuario_role", "co_role_user"));
+		pstm.setLong(2, usuario.getCoRol());
+		pstm.setLong(3, id);
+		pstm.setBoolean(4, true);
+		resultado = pstm.executeUpdate();
+		
+		
 		} catch (Exception e) {
 			System.out.println("Error en el select de usuario "+e);
 		} finally{

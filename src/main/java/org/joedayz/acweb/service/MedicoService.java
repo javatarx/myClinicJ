@@ -20,4 +20,8 @@ public class MedicoService {
 		return medicoDAO.getMedicosPorEspecialidad(idEspecialidad);
 	}
 	
+	public BNMedico getMedicoPorId(String idMedico) throws Exception{
+		return medicoDAO.getMedicoPorId(idMedico);
+	}
+	
 }

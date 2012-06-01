@@ -67,6 +67,7 @@ public class ServletUsuario extends HttpServlet{
 		String tipodocumento=request.getParameter("tipodocumento");
 		String nrodocumento=request.getParameter("nrodocumento");
 		String email=request.getParameter("email");
+		String idRol = request.getParameter("rol");
 		
 		usuario.setUserName(username);
 		usuario.setNombres(nombres);
@@ -78,6 +79,9 @@ public class ServletUsuario extends HttpServlet{
 		usuario.setTipoDocumento(tipodocumento.charAt(0));
 		usuario.setDocumento(new Long(nrodocumento));
 		usuario.setEmail(email);
+		
+		usuario.setCoRol(Long.parseLong(idRol));
+		
 		int resultado=0;
 		
 		try {

@@ -34,6 +34,15 @@
 	<td><input type="text" id="username" name="username" size="60" autofocus required>	</td>
 	</tr>
 	<tr>
+	<td width="30%"><label class="labels">Rol</label></td>
+	<td>
+		<select name="rol" id="rol">
+			<option value="1">Administrador</option>
+			<option value="2">Cliente</option>
+		</select>
+	</td>
+	</tr>
+	<tr>
 	<td><label class="labels">Nombres</label></td>
 	<td><input type="text" id="nombres" name="nombres"  size="60" required></td>
 	</tr>
@@ -98,7 +107,7 @@
 	<td colspan="2" align="center" class="labels">
 	<c:out value="${mensaje}"/>
 	</td>
-	<meta http-equiv="refresh" content="1;url=/ServletUsuario?list=lista">
+	<meta http-equiv="refresh" content="1;url=ServletUsuario?list=lista">
 	</c:when>
 	<c:otherwise>
 	<td colspan="2" align="center">

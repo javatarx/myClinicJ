@@ -93,7 +93,7 @@ public class JdbcCitaDaoImpl implements CitaDAO{
 			pstm = con.prepareStatement(sql);
 			
 			pstm.setLong(1, GeneradorId.getId("cita", "co_cita"));
-			pstm.setDate(2, (Date)cita.getFecha());
+			pstm.setDate(2, new java.sql.Date(cita.getFecha().getTime()));
 			pstm.setString(3, cita.getHorario());
 			pstm.setLong(4, cita.getMedico().getCoMedico());
 			pstm.setLong(5, cita.getUsuario().getCoUser());
@@ -160,6 +160,64 @@ public class JdbcCitaDaoImpl implements CitaDAO{
 			con.close();
 		}
 		return horariosOcupados;
+	}
+
+	public List<BNCita> getListaCitasPorUsuario(String idUsuario)
+			throws Exception {
+		PreparedStatement pstm = null;
+		Connection con = null;
+		ResultSet rs = null;
+		List<BNCita> citas = new ArrayList<BNCita>();
+		
+		try {
+			con =  daoSupport.getConnexion();
+			
+			String sql = "select a.co_cita, a.fecha, a.horario, a.comentario, "+
+							" b.co_medico, b.de_medico, c.co_especialidad, c.de_especialidad, "+
+							" d.co_user, d.nombres, d.apellidos "+
+							"from cita a, medico b, especialidad c, usuario d "+
+							" where a.co_medico = b.co_medico and b.co_especialidad = c.co_especialidad "+
+							" and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user"+
+							" and a.co_usuario=?";
+			pstm = con.prepareStatement(sql);
+			pstm.setLong(1, Long.parseLong(idUsuario));
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				BNCita cita = new BNCita();
+				BNUsuario usuario = new BNUsuario();
+				BNMedico medico = new BNMedico();
+				BNEspecialidad especialidad = new BNEspecialidad();
+				
+				cita.setCoCita(rs.getLong(1));
+				cita.setFecha(rs.getDate(2));
+				cita.setHorario(rs.getString(3));
+				cita.setComentario(rs.getString(4));
+				
+				especialidad.setCoEspecialidad(rs.getLong(7));
+				especialidad.setDeEspecialidad(rs.getString(8));
+				
+				medico.setCoMedico(rs.getLong(5));
+				medico.setDeMedico(rs.getString(6));
+				medico.setEspecialidad(especialidad);
+				
+				usuario.setCoUser(rs.getLong(9));
+				usuario.setNombres(rs.getString(10));
+				usuario.setApellidos(rs.getString(11));
+				
+				cita.setUsuario(usuario);
+				cita.setMedico(medico);
+				cita.setEspecialidad(especialidad);
+				
+				citas.add(cita);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			rs.close();
+			pstm.close();
+			con.close();
+		}
+		return citas;
 	}
 
 }
