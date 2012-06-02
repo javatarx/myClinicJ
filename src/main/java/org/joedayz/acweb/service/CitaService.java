@@ -11,6 +11,10 @@ public class CitaService {
 	DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.H2);
 	CitaDAO citaDAO = fabrica.getCitaDAO();
 	
+	public BNCita getCitaPorId(String idCita) throws Exception{
+		return citaDAO.getCitaPorId(idCita);
+	}
+	
 	public List<BNCita> getListaCitas() throws Exception{
 		return citaDAO.getListaCitas();
 	}
@@ -27,4 +31,7 @@ public class CitaService {
 		return citaDAO.eliminarCita(idCita);
 	}
 	
+	public int actualizarCita(BNCita cita) throws Exception{
+		return citaDAO.actualizarCita(cita);
+	}
 }

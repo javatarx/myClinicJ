@@ -1,10 +1,12 @@
-<%@page import="org.joedayz.acweb.domain.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="/WEB-INF/tag/myClinic.tld" prefix="acweb" %>
+<%@page import="org.joedayz.acweb.domain.*"%>
 <!doctype html>
 <%BNUsuario usuario=(BNUsuario)request.getSession().getAttribute("usuario"); %>
+<%BNCita cita = (BNCita)request.getAttribute("cita"); %>
 <html lang="es">
 <head>
 	<meta charset="utf-8">
@@ -38,7 +40,8 @@
 	</tr>
 	<tr>
 	<td width="30%"><label class="labels">Especialidad</label></td>
-	<td><acweb:ComboEspecialidades/></td>
+	<td>
+		<acweb:ComboEspecialidades idEspecialidad="<%=cita.getEspecialidad().getCoEspecialidad().toString()%>" /></td>
 	</tr>
 	<tr>
 	<td><label class="labels">M&eacute;dico</label></td>
@@ -48,7 +51,7 @@
 	</tr>
 	<tr>
 	<td><label class="labels">Fecha</label></td>
-	<td><input type="date" id="fecha" name="fecha" size="60" required></td>
+	<td><input type="date" id="fecha" name="fecha" size="60" required value='<fmt:formatDate value="${cita.fecha}" pattern="yyyy-MM-dd" />'></td>
 	</tr>
 	<tr>
 	<td><label class="labels">Horario</label></td>
@@ -60,11 +63,13 @@
 	<tr>
 	<td><label class="labels">Comentario</label></td>
 	<td>
-		<textarea rows="2" cols="25" name="comentario" id="comentario"></textarea>
+		<textarea rows="2" cols="25" name="comentario" id="comentario"><%=cita.getComentario()%></textarea>
 	</td>
 	</tr>
 	<tr>
 	<td colspan="2" align="center">
+		<input type="hidden" value='<c:out value="${tipo}"></c:out>' name="tipo">
+		<input type="hidden" value='<c:out value="${cita.coCita}"></c:out>' name="idCita">
 		<input type="submit" value="Guardar" >
 	</td>
 	</tr>
@@ -77,8 +82,9 @@
  
 	<script type="text/javascript">
 	$(function() {
+		
 		$("#fecha").change(function(){
-			datosHorario = "fecha="+$("#fecha").val();
+			datosHorario = "fecha="+$("#fecha").val()+"&idMedico="+$("#idMedico option:selected").val();
 			$.ajax({
 				type	: "POST",
 				url		: "pages/cita/listaHorarios.jsp",
@@ -115,14 +121,33 @@
 				}
 			});
 		});
-		
+	
 		$("#idEspecialidad").ready(function(){
 			$.ajax({
 				type	: "POST",
 				url		: "pages/cita/listaMedicos.jsp",
-				data	: "idEspecialidad="+$("#idEspecialidad option:selected").val(),
+				data	: "idEspecialidad="+$("#idEspecialidad option:selected").val()+"&idMedico=<%=cita.getMedico().getCoMedico().toString()%>",
 				success	: function(data){
 					$("#medico").html(data);
+					
+					datosHorario = "fecha="+$("#fecha").val()+"&idMedico="+$("#idMedico option:selected").val()+"&horario=<%=cita.getHorario()%>";
+					$.ajax({
+						type	: "POST",
+						url		: "pages/cita/listaHorarios.jsp",
+						data	: datosHorario,
+						success	: function(data){
+							$("#horario").html(data);
+						},
+						error	: function(){
+							$("#horario").html("No se encontraron horarios disponibles");
+						},
+						statusCode: {
+						    404: function() {
+						      alert("page not found");
+						    }
+						}
+					});
+					
 				},
 				error	: function(){
 					$("#medico").html("No se encontraron medicos de esta especialidad");
@@ -133,6 +158,8 @@
 				    }
 				}
 			});
+			
+			
 		});
 		$( "#fecha" ).datepicker({
 			dateFormat:"yy-mm-dd",

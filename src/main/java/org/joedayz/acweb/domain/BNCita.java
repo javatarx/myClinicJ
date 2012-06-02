@@ -16,6 +16,21 @@ public class BNCita implements Serializable{
 	private String comentario;
 	private char stCita;
 	
+	public BNCita() {
+	}
+	
+	public BNCita(Long coCita, BNMedico medico, BNUsuario usuario,
+			BNEspecialidad especialidad, Date fecha, String horario,
+			String comentario) {
+		super();
+		this.coCita = coCita;
+		this.medico = medico;
+		this.usuario = usuario;
+		this.especialidad = especialidad;
+		this.fecha = fecha;
+		this.horario = horario;
+		this.comentario = comentario;
+	}
 	public Long getCoCita() {
 		return coCita;
 	}

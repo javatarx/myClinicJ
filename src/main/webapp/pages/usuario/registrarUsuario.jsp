@@ -113,7 +113,6 @@
 	<td colspan="2" align="center">
 	</td>
 	</c:otherwise>
-		
 	</c:choose>
 	
 	</tr>

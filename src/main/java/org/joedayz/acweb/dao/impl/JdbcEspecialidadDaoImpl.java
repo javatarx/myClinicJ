@@ -26,7 +26,7 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO{
 			con = daoSupport.getConnexion();
 			
 			String sql = "select co_especialidad,de_especialidad,st_especialidad "+
-							" from especialidad";
+							" from especialidad order by de_especialidad ASC ";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			

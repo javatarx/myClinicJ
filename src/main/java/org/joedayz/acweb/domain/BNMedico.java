@@ -11,6 +11,15 @@ public class BNMedico implements Serializable {
 	private char stMedico;
 	private BNEspecialidad especialidad;
 	
+	public BNMedico() {
+	}
+	
+	public BNMedico(Long coMedico, String deMedico, BNEspecialidad especialidad) {
+		super();
+		this.coMedico = coMedico;
+		this.deMedico = deMedico;
+		this.especialidad = especialidad;
+	}
 	public Long getCoMedico() {
 		return coMedico;
 	}

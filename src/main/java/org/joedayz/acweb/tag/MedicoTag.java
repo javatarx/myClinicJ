@@ -13,7 +13,16 @@ public class MedicoTag extends TagSupport{
 	private static final long serialVersionUID = 1L;
 	
 	private String idEspecialidad;
+	private String idMedico;
 	
+	public String getIdMedico() {
+		return idMedico;
+	}
+
+	public void setIdMedico(String idMedico) {
+		this.idMedico = idMedico;
+	}
+
 	public String getIdEspecialidad() {
 		return idEspecialidad;
 	}
@@ -33,9 +42,12 @@ public class MedicoTag extends TagSupport{
 			
 			salida.print("<select id=\"idMedico\" name=\"idMedico\" >");
 			for (BNMedico medico : medicos) {
-				salida.print("<option value=");
+				salida.print("<option value='");
 				salida.print(medico.getCoMedico());
-				salida.print(">");
+			if(getIdMedico().equalsIgnoreCase(medico.getCoMedico().toString())){
+				salida.print("' selected='selected");
+			}
+				salida.print("' >");
 				salida.print(medico.getDeMedico());
 				salida.println("</option>");
 			}

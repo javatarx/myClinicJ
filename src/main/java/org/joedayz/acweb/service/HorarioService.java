@@ -16,7 +16,7 @@ public class HorarioService {
 	DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.H2);
 	CitaDAO citaDAO = fabrica.getCitaDAO();
 	
-	public List<String> getListaHorarios(String fecha){
+	public List<String> getListaHorariosDisponibles(String fecha,String idMedico){
 		SimpleDateFormat formato1 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formato2 = new SimpleDateFormat("HH:mm a");
 		
@@ -38,7 +38,7 @@ public class HorarioService {
 			finTarde.set(dia.getYear(),dia.getMonth(),dia.getDay(),Constantes.horaFinT2,0,0);
 			
 			
-			List<String> horariosOcupados = citaDAO.getListaHorariosOcupados(formato1.parse(fecha));
+			List<String> horariosOcupados = citaDAO.getListaHorariosDisponibles(formato1.parse(fecha),idMedico);
 			
 			while (inicioMannana.before(finMannana)) {
 				horarios.add(formato2.format(inicioMannana.getTime()));
@@ -52,6 +52,43 @@ public class HorarioService {
 			
 			horarios.removeAll(horariosOcupados);
 			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return horarios;
+	}
+	public List<String> getListaHorarios(String fecha){
+		SimpleDateFormat formato1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formato2 = new SimpleDateFormat("HH:mm a");
+		
+		List<String> horarios = new ArrayList<String>();
+		
+		try {
+			Date dia = formato1.parse(fecha);
+			
+			Calendar inicioMannana = Calendar.getInstance();
+			inicioMannana.set(dia.getYear(),dia.getMonth(),dia.getDay(),Constantes.horaInicioT1,0,0);
+			
+			Calendar finMannana = Calendar.getInstance();
+			finMannana.set(dia.getYear(),dia.getMonth(),dia.getDay(),Constantes.horaFinT1,0,0);
+			
+			Calendar inicioTarde = Calendar.getInstance();
+			inicioTarde.set(dia.getYear(),dia.getMonth(),dia.getDay(),Constantes.horaInicioT2,0,0);
+			
+			Calendar finTarde = Calendar.getInstance();
+			finTarde.set(dia.getYear(),dia.getMonth(),dia.getDay(),Constantes.horaFinT2,0,0);
+			
+			while (inicioMannana.before(finMannana)) {
+				horarios.add(formato2.format(inicioMannana.getTime()));
+				inicioMannana.add(Calendar.MINUTE, Constantes.duracionCita);
+			}
+			
+			while (inicioTarde.before(finTarde)) {
+				horarios.add(formato2.format(inicioTarde.getTime()));
+				inicioTarde.add(Calendar.MINUTE, Constantes.duracionCita);
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

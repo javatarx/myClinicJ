@@ -9,6 +9,14 @@ public class BNEspecialidad  implements Serializable{
 	private String deEspecialidad;
 	private char stEspecialidad;
 	
+	public BNEspecialidad() {
+	}
+	
+	public BNEspecialidad(Long coEspecialidad, String deEspecialidad) {
+		super();
+		this.coEspecialidad = coEspecialidad;
+		this.deEspecialidad = deEspecialidad;
+	}
 	public Long getCoEspecialidad() {
 		return coEspecialidad;
 	}

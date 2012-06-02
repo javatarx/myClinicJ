@@ -25,7 +25,8 @@ public class JdbcMedicoDaoImpl implements MedicoDAO{
 			con = daoSupport.getConnexion();
 			
 			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "+
-							" from medico a, especialidad b where a.co_especialidad = b.co_especialidad";
+							" from medico a, especialidad b where a.co_especialidad = b.co_especialidad "+
+							" order by a.de_medico ASC ";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
@@ -65,7 +66,7 @@ public class JdbcMedicoDaoImpl implements MedicoDAO{
 			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "+
 							" from medico a, especialidad b "+
 							" where a.co_especialidad = b.co_especialidad"+
-							" and b.co_especialidad=?";
+							" and b.co_especialidad=? order by a.de_medico ASC ";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, idEspecialidad);
 			rs = pstm.executeQuery();

@@ -2,6 +2,8 @@ package org.joedayz.acweb.web;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -47,9 +49,23 @@ public class ServletCita extends HttpServlet {
 			}
 			request.setAttribute("citas", citas);
 			request.getRequestDispatcher(VIEWCITAS).forward(request, response);
-		}else if ("I".equals(tipo)) {
+		}else if ("I".equals(tipo)) { //si es una nueva cita
+			BNCita cita= new BNCita(new Long(0),new BNMedico(new Long(0),"x",new BNEspecialidad(new Long(0), "x")),usuarioSession,new BNEspecialidad(new Long(0), "x"),Calendar.getInstance().getTime(),"x","");
+			request.setAttribute("tipo", "I");
+			request.setAttribute("cita", cita);
 			request.getRequestDispatcher(VIEWCITASREGISTRAR).forward(request, response);
-		}else if ("E".equals(tipo)) {
+		}else if ("U".equals(tipo)) { //si se actualizara la cita
+			BNCita cita = new BNCita();
+			try {
+				String idCita = request.getParameter("idCita");
+				cita = servicio.getCitaPorId(idCita);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("tipo", "U");
+			request.setAttribute("cita", cita);
+			request.getRequestDispatcher(VIEWCITASREGISTRAR).forward(request, response);
+		}else if ("E".equals(tipo)) { //si se eliminara la cita
 			String idCita = request.getParameter("idCita");
 			try {
 				servicio.eliminarCita(idCita);
@@ -82,11 +98,14 @@ public class ServletCita extends HttpServlet {
 		
 		BNUsuario usuarioSession=(BNUsuario)request.getSession().getAttribute("usuario");
 		
+		String tipo = request.getParameter("tipo");
 		String idMedico = request.getParameter("idMedico");
 		String idEspecialidad =  request.getParameter("idEspecialidad");
 		String fecha =  request.getParameter("fecha");
 		String comentario = request.getParameter("comentario");
 		String horario = request.getParameter("idHorario");
+		
+		int cont = 0;
 		
 		try {
 			BNMedico medico = medicoService.getMedicoPorId(idMedico);
@@ -99,9 +118,14 @@ public class ServletCita extends HttpServlet {
 			cita.setHorario(horario);
 			cita.setComentario(comentario);
 			 
-			int x = servicio.registrarCita(cita);
-			
-			if(x>0){
+			if("I".equals(tipo)){
+				cont = servicio.registrarCita(cita);
+			}else if ("U".equals(tipo)) {
+				String idCita=request.getParameter("idCita");
+				cita.setCoCita(Long.parseLong(idCita));
+				cont = servicio.actualizarCita(cita);
+			}
+			if(cont>0){
 				List<BNCita> citas = null;
 				
 				try {
@@ -126,5 +150,7 @@ public class ServletCita extends HttpServlet {
 		}
 		
 	}
+	
+	
 
 }

@@ -60,7 +60,7 @@ public class CitaDAOTest {
 	public void listarHorariosOcupadosTest() throws Exception{
 		Calendar fecha =  Calendar.getInstance();
 		fecha.set(2012,4,31);
-		List<String> horarios = citaDAO.getListaHorariosOcupados(fecha.getTime());
+		List<String> horarios = citaDAO.getListaHorariosDisponibles(fecha.getTime(),"1");
 		for (String hora : horarios) {
 			System.out.println(hora);
 		}

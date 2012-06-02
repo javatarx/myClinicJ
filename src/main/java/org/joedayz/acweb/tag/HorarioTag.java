@@ -1,6 +1,7 @@
 package org.joedayz.acweb.tag;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
@@ -12,9 +13,26 @@ import org.joedayz.acweb.service.HorarioService;
 public class HorarioTag extends TagSupport{
 	private static final long serialVersionUID = 1L;
 	
-
+	private String idMedico;
 	private String fecha;
+	private String horario;
 	
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+	public String getIdMedico() {
+		return idMedico;
+	}
+
+	public void setIdMedico(String idMedico) {
+		this.idMedico = idMedico;
+	}
+
 	public String getFecha() {
 		return fecha;
 	}
@@ -26,7 +44,14 @@ public class HorarioTag extends TagSupport{
 	@Override
 	public int doEndTag() throws JspException {
 		HorarioService horarioService = new HorarioService();
-		List<String> horarios = horarioService.getListaHorarios(getFecha()); 
+		List<String> horarios = new ArrayList<String>();
+		
+		if ("x".equalsIgnoreCase(getHorario())) {
+			horarios = horarioService.getListaHorariosDisponibles(getFecha(),getIdMedico());
+		} else{
+			horarios = horarioService.getListaHorarios(getFecha());
+		}
+		
 		JspWriter salida =  pageContext.getOut();
 		
 		try {
@@ -34,7 +59,10 @@ public class HorarioTag extends TagSupport{
 			for (String hora : horarios) {
 				salida.print("<option value='");
 				salida.print(hora);
-				salida.print("'>");
+			if(getHorario().equalsIgnoreCase(hora)){
+				salida.print("' selected='selected");
+			}
+				salida.print("' >");
 				salida.print(hora);
 				salida.println("</option>");
 			}

@@ -10,6 +10,11 @@
 		<name>ComboEspecialidades</name>
 		<tag-class>org.joedayz.acweb.tag.EspecialidadesTag</tag-class>
 		<body-content>empty</body-content>
+		<attribute>
+			<name>idEspecialidad</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>ComboMedicos</name>
@@ -20,14 +25,29 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>idMedico</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>ComboHorarios</name>
 		<tag-class>org.joedayz.acweb.tag.HorarioTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
+			<name>idMedico</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>fecha</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>horario</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
