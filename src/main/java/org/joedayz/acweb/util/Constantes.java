@@ -12,6 +12,6 @@ public class Constantes {
 	public static int horaFinT2 = 18;
 	public static int duracionCita = 25; //minutos
 	
-	public static String directorioBaseDeDatos = System.getProperty("user.home")+"\\myClinic";
+	public static String directorioBaseDeDatos = "";
 	
 }
