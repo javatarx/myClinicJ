@@ -18,6 +18,8 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 	public int contador=3;
 
 	public BNUsuario validarUsuario(String usuario,String password)throws Exception{
+            
+            System.out.println("ESTOY VALIDANDO EL USUARIO");
 		
 		PreparedStatement pstm= null;
 		Connection 		   con= null;
@@ -27,7 +29,7 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 		try {
 			con = daoSupport.getConnexion();
 			String sql ="	select usu.CO_USER as CO_USER,usu.USERNAME as USERNAME,usu.NOMBRES as NOMBRES,usu.APELLIDOS as APELLIDOS,rol.de_role as DE_ROLE" +
-						"	from usuario usu " +
+						"	from USUARIO usu " +
 						"	inner join USUARIO_ROLE usurol on usu.co_user = usurol.co_user " +
 						"	inner join ROLE rol on rol.co_role=usurol.co_role   " +
 						"	where usu.username=? and usu.password=?  ";

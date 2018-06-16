@@ -12,7 +12,7 @@ public class TestGeneraDB {
 
 	@Test
 	public void getDirectorioTest(){
-		File folder = new File(System.getProperty("user.home")+"\\myclinic");
+		File folder = new File("myclinic");
 		if(!folder.exists()){
 			folder.mkdirs();
 		}else{

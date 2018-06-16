@@ -11,7 +11,8 @@ public class BaseDaoSupport {
 	  try {
 		Class.forName("org.h2.Driver");
 	
-		connection  = DriverManager.getConnection("jdbc:h2:myClinic", "sa", "");
+//		connection  = DriverManager.getConnection("jdbc:h2:myClinic", "sa", "");
+                connection  = DriverManager.getConnection("jdbc:h2:/"+Constantes.directorioBaseDeDatos+"/myClinic", "sa", "");
 	  }	 catch (ClassNotFoundException e) {
 
 		System.out.println("Error de Conexion");

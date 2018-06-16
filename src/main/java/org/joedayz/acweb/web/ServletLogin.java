@@ -13,61 +13,59 @@ import org.joedayz.acweb.domain.BNUsuario;
 import org.joedayz.acweb.service.UsuarioService;
 import org.joedayz.acweb.util.Constantes;
 
-public class ServletLogin extends HttpServlet{
-	
-	public static final String VIEWLOGIN="/login.jsp";
-	public static final String VIEWMAIN="/pages/mainMenu.jsp";
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException {
-		
-		BNUsuario usuario= new BNUsuario();
-		HttpSession session=request.getSession(true);
-		UsuarioService servicio= new UsuarioService();
-		
-		String usu	= request.getParameter("usuario");
-		String pass	= request.getParameter("pass");
+public class ServletLogin extends HttpServlet {
 
-		if((usu==null || pass==null)||(usu.equals(Constantes.VACIO))|| pass.equals(Constantes.VACIO)){
-			request.setAttribute("mensaje", "Usuario y Contrase&ntilde;a Incorrecta.");
-			
-			getServletContext().getRequestDispatcher(VIEWLOGIN).forward(request, response);
-			
-		}else{
-		
-		try {
-			usuario=servicio.validarUsuario(usu,pass);
-			usuario.setFechaSesion(Calendar.getInstance().getTime());
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(usuario==null){
-			request.setAttribute("mensaje", "No Se encontro el Usuario.");
-			getServletContext().getRequestDispatcher(VIEWLOGIN).forward(request, response);
+    public static final String VIEWLOGIN = "/login.jsp";
+    public static final String VIEWMAIN = "/pages/mainMenu.jsp";
 
-		}else{
-			request.getSession().setAttribute("usuario",usuario);
-			getServletContext().getRequestDispatcher(VIEWMAIN).forward(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		}
-		
+        BNUsuario usuario = new BNUsuario();
+        HttpSession session = request.getSession(true);
+        UsuarioService servicio = new UsuarioService();
 
-		}
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-	
-		HttpSession sesion = request.getSession();
+        String usu = request.getParameter("usuario");
+        String pass = request.getParameter("pass");
 
-		sesion.invalidate();
+        if ((usu == null || pass == null) || (usu.equals(Constantes.VACIO)) || pass.equals(Constantes.VACIO)) {
+            request.setAttribute("mensaje", "Usuario y Contrase&ntilde;a Incorrecta.");
 
-		getServletContext().getRequestDispatcher(VIEWLOGIN).forward(request, response);
-	
-	}
+            getServletContext().getRequestDispatcher(VIEWLOGIN).forward(request, response);
+
+        } else {
+
+            try {
+                usuario = servicio.validarUsuario(usu, pass);
+                usuario.setFechaSesion(Calendar.getInstance().getTime());
+
+            } catch (Exception e) {
+                System.err.println("OCURRIO UN ERROR");
+                e.printStackTrace();
+            }
+            if (usuario == null) {
+                request.setAttribute("mensaje", "No Se encontro el Usuario.");
+                getServletContext().getRequestDispatcher(VIEWLOGIN).forward(request, response);
+
+            } else {
+                request.getSession().setAttribute("usuario", usuario);
+                getServletContext().getRequestDispatcher(VIEWMAIN).forward(request, response);
+
+            }
+
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession sesion = request.getSession();
+
+        sesion.invalidate();
+
+        getServletContext().getRequestDispatcher(VIEWLOGIN).forward(request, response);
+
+    }
 
 }

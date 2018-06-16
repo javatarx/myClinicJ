@@ -25,6 +25,8 @@
         <mapping class="org.joedayz.acweb.domain.BNPaciente"/>
         <mapping class="org.joedayz.acweb.domain.BNEspecialidad"/>
         <mapping class="org.joedayz.acweb.domain.BNMedico"/>
+        <mapping class="org.joedayz.acweb.domain.BNCita"/>
+        <mapping class="org.joedayz.acweb.domain.BNUsuario"/>
 
     </session-factory>
 
