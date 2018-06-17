@@ -8,7 +8,7 @@
     <session-factory>
 
         <property name="connection.driver_class">org.h2.Driver</property>
-        <property name="connection.url">jdbc:h2:myClinic;DB_CLOSE_DELAY=-1;MVCC=TRUE</property>
+        <property name="connection.url">jdbc:h2:file:~/myClinic/myClinic;DB_CLOSE_DELAY=-1;MVCC=TRUE</property>
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
 

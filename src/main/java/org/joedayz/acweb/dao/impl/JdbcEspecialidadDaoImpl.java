@@ -43,6 +43,8 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO{
 			rs.close();
 			con.close();
 		}
+                
+                System.out.println("RETORNANDO ESPECIALIDADES");
 		
  		return especialidades;
 	}

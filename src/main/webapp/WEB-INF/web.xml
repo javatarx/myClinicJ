@@ -16,14 +16,14 @@
     </servlet>
     <servlet>
         <description>
-     	</description>
+        </description>
         <display-name>ServletCita</display-name>
         <servlet-name>ServletCita</servlet-name>
         <servlet-class>org.joedayz.acweb.web.ServletCita</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletMedicos</servlet-name>
-        <servlet-class>org.joedayz.acweb.web.ServletMedicos</servlet-class>
+        <servlet-name>Medico</servlet-name>
+        <servlet-class>org.joedayz.acweb.web.Medico</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
@@ -39,8 +39,8 @@
     </servlet-mapping>
     <!-- minutos -->
     <servlet-mapping>
-        <servlet-name>ServletMedicos</servlet-name>
-        <url-pattern>/medicos</url-pattern>
+        <servlet-name>Medico</servlet-name>
+        <url-pattern>/Medico</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>20</session-timeout>
