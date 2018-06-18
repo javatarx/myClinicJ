@@ -3,7 +3,7 @@ package org.joedayz.acweb.test;
 import java.util.List;
 
 import org.joedayz.acweb.dao.EspecialidadDAO;
-import org.joedayz.acweb.dao.impl.HbmEspecialidadDaoImpl;
+import org.joedayz.acweb.dao.hbm.impl.EspecialidadDaoImpl;
 import org.joedayz.acweb.dao.impl.JdbcEspecialidadDaoImpl;
 import org.joedayz.acweb.domain.BNEspecialidad;
 import org.junit.Test;
@@ -15,7 +15,7 @@ public class EspecialidadDAOTest {
 
 	@Test
 	public void getListaEspecialidades(){
-		EspecialidadDAO dao = new HbmEspecialidadDaoImpl();
+		EspecialidadDAO dao = new EspecialidadDaoImpl();
 		
 		try {
 			List<BNEspecialidad> especialidades = dao.getEspecialidades();
@@ -29,7 +29,7 @@ public class EspecialidadDAOTest {
 	
 	@Test
 	public void getEspecialidadPorMedico(){
-		EspecialidadDAO dao = new HbmEspecialidadDaoImpl();
+		EspecialidadDAO dao = new EspecialidadDaoImpl();
 		String idMedico = "2";
 		
 		try {

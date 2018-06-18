@@ -6,6 +6,10 @@ import org.joedayz.acweb.domain.BNEspecialidad;
 
 public interface EspecialidadDAO {
 	public List<BNEspecialidad> getEspecialidades() throws Exception;
+
 	public List<BNEspecialidad> getEspecialidadPorMedico(String idMedico) throws Exception;
+
 	public BNEspecialidad getEspecialidadPorId(String idEspecialidad) throws Exception;
+
+	public int guardar(BNEspecialidad especialidad) throws Exception;
 }

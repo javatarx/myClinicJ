@@ -12,26 +12,27 @@ import org.joedayz.acweb.dao.daoFactory.BaseDaoSupport;
 import org.joedayz.acweb.domain.BNEspecialidad;
 import org.joedayz.acweb.domain.BNMedico;
 
-public class JdbcMedicoDaoImpl implements MedicoDAO{
+public class JdbcMedicoDaoImpl implements MedicoDAO {
 	private BaseDaoSupport daoSupport = new BaseDaoSupport();
 	public int contador = 3;
+
 	public List<BNMedico> getListaMedicos() throws Exception {
 		PreparedStatement pstm = null;
 		Connection con = null;
 		ResultSet rs = null;
 		List<BNMedico> medicos = new ArrayList<BNMedico>();
-		
+
 		try {
 			con = daoSupport.getConnexion();
-			
-			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "+
-							" from medico a, especialidad b where a.co_especialidad = b.co_especialidad "+
-							" order by a.de_medico ASC ";
+
+			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "
+					+ " from medico a, especialidad b where a.co_especialidad = b.co_especialidad "
+					+ " order by a.de_medico ASC ";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
-			
-			while(rs.next()){
-				
+
+			while (rs.next()) {
+
 				BNEspecialidad especialidad = new BNEspecialidad();
 				especialidad.setCoEspecialidad(rs.getLong(3));
 				especialidad.setDeEspecialidad(rs.getString(4));
@@ -40,39 +41,37 @@ public class JdbcMedicoDaoImpl implements MedicoDAO{
 				medico.setCoMedico(rs.getLong(1));
 				medico.setDeMedico(rs.getString(2));
 				medico.setEspecialidad(especialidad);
-				
+
 				medicos.add(medico);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			pstm.close();
 			rs.close();
 			con.close();
 		}
- 		return medicos;
+		return medicos;
 	}
 
-	public List<BNMedico> getMedicosPorEspecialidad(String idEspecialidad)
-			throws Exception {
+	public List<BNMedico> getMedicosPorEspecialidad(String idEspecialidad) throws Exception {
 		PreparedStatement pstm = null;
 		Connection con = null;
 		ResultSet rs = null;
 		List<BNMedico> medicos = new ArrayList<BNMedico>();
-		
+
 		try {
 			con = daoSupport.getConnexion();
-			
-			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "+
-							" from medico a, especialidad b "+
-							" where a.co_especialidad = b.co_especialidad"+
-							" and b.co_especialidad=? order by a.de_medico ASC ";
+
+			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "
+					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad"
+					+ " and b.co_especialidad=? order by a.de_medico ASC ";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, idEspecialidad);
 			rs = pstm.executeQuery();
-			
-			while(rs.next()){
-				
+
+			while (rs.next()) {
+
 				BNEspecialidad especialidad = new BNEspecialidad();
 				especialidad.setCoEspecialidad(rs.getLong(3));
 				especialidad.setDeEspecialidad(rs.getString(4));
@@ -81,17 +80,17 @@ public class JdbcMedicoDaoImpl implements MedicoDAO{
 				medico.setCoMedico(rs.getLong(1));
 				medico.setDeMedico(rs.getString(2));
 				medico.setEspecialidad(especialidad);
-				
+
 				medicos.add(medico);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			pstm.close();
 			rs.close();
 			con.close();
 		}
- 		return medicos;
+		return medicos;
 	}
 
 	public BNMedico getMedicoPorId(String idMedico) throws Exception {
@@ -99,20 +98,19 @@ public class JdbcMedicoDaoImpl implements MedicoDAO{
 		Connection con = null;
 		ResultSet rs = null;
 		BNMedico medico = new BNMedico();
-		
+
 		try {
 			con = daoSupport.getConnexion();
-			
-			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "+
-							" from medico a, especialidad b "+
-							" where a.co_especialidad = b.co_especialidad"+
-							" and a.co_medico=?";
+
+			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "
+					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad"
+					+ " and a.co_medico=?";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, idMedico);
 			rs = pstm.executeQuery();
-			
-			if(rs.next()){
-				
+
+			if (rs.next()) {
+
 				BNEspecialidad especialidad = new BNEspecialidad();
 				especialidad.setCoEspecialidad(rs.getLong(3));
 				especialidad.setDeEspecialidad(rs.getString(4));
@@ -124,12 +122,17 @@ public class JdbcMedicoDaoImpl implements MedicoDAO{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			pstm.close();
 			rs.close();
 			con.close();
 		}
- 		return medico;
- 	}
+		return medico;
+	}
+
+	public int guardar(BNMedico medico) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

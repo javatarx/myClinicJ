@@ -11,26 +11,26 @@ import org.joedayz.acweb.dao.EspecialidadDAO;
 import org.joedayz.acweb.dao.daoFactory.BaseDaoSupport;
 import org.joedayz.acweb.domain.BNEspecialidad;
 
-public class JdbcEspecialidadDaoImpl implements EspecialidadDAO{
+public class JdbcEspecialidadDaoImpl implements EspecialidadDAO {
 
 	private BaseDaoSupport daoSupport = new BaseDaoSupport();
 	public int contador = 3;
-	
-	public List<BNEspecialidad> getEspecialidades() throws Exception{
+
+	public List<BNEspecialidad> getEspecialidades() throws Exception {
 		PreparedStatement pstm = null;
 		Connection con = null;
 		ResultSet rs = null;
 		List<BNEspecialidad> especialidades = new ArrayList<BNEspecialidad>();
-		
+
 		try {
 			con = daoSupport.getConnexion();
-			
-			String sql = "select co_especialidad,de_especialidad,st_especialidad "+
-							" from especialidad order by de_especialidad ASC ";
+
+			String sql = "select co_especialidad,de_especialidad,st_especialidad "
+					+ " from especialidad order by de_especialidad ASC ";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				BNEspecialidad especialidad = new BNEspecialidad();
 				especialidad.setCoEspecialidad(rs.getLong(1));
 				especialidad.setDeEspecialidad(rs.getString(2));
@@ -38,15 +38,15 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			pstm.close();
 			rs.close();
 			con.close();
 		}
-                
-                System.out.println("RETORNANDO ESPECIALIDADES");
-		
- 		return especialidades;
+
+		System.out.println("RETORNANDO ESPECIALIDADES");
+
+		return especialidades;
 	}
 
 	public List<BNEspecialidad> getEspecialidadPorMedico(String idMedico) throws Exception {
@@ -54,19 +54,18 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO{
 		Connection con = null;
 		ResultSet rs = null;
 		List<BNEspecialidad> especialidades = new ArrayList<BNEspecialidad>();
-		
+
 		try {
 			con = daoSupport.getConnexion();
-			
-			String sql = "select b.co_especialidad,b.de_especialidad,b.st_especialidad "+
-							" from medico a, especialidad b "+
-							" where a.co_especialidad = b.co_especialidad "+
-							" and a.co_medico = ? ";
+
+			String sql = "select b.co_especialidad,b.de_especialidad,b.st_especialidad "
+					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad "
+					+ " and a.co_medico = ? ";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, idMedico);
 			rs = pstm.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				BNEspecialidad especialidad = new BNEspecialidad();
 				especialidad.setCoEspecialidad(rs.getLong(1));
 				especialidad.setDeEspecialidad(rs.getString(2));
@@ -74,46 +73,49 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			pstm.close();
 			rs.close();
 			con.close();
 		}
-		
- 		return especialidades;
+
+		return especialidades;
 	}
 
-	public BNEspecialidad getEspecialidadPorId(String idEspecialidad)
-			throws Exception {
+	public BNEspecialidad getEspecialidadPorId(String idEspecialidad) throws Exception {
 		PreparedStatement pstm = null;
 		Connection con = null;
 		ResultSet rs = null;
 		BNEspecialidad especialidad = new BNEspecialidad();
-		
+
 		try {
 			con = daoSupport.getConnexion();
-			
-			String sql = "select b.co_especialidad,b.de_especialidad,b.st_especialidad "+
-							" from medico a, especialidad b "+
-							" where a.co_especialidad = b.co_especialidad "+
-							" and b.co_especialidad = ? ";
+
+			String sql = "select b.co_especialidad,b.de_especialidad,b.st_especialidad "
+					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad "
+					+ " and b.co_especialidad = ? ";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, idEspecialidad);
 			rs = pstm.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				especialidad = new BNEspecialidad();
 				especialidad.setCoEspecialidad(rs.getLong(1));
 				especialidad.setDeEspecialidad(rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			pstm.close();
 			rs.close();
 			con.close();
 		}
- 		return especialidad;
+		return especialidad;
+	}
+
+	public int guardar(BNEspecialidad especialidad) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

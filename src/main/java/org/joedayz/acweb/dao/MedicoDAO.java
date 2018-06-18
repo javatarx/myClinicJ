@@ -7,6 +7,10 @@ import org.joedayz.acweb.domain.BNMedico;
 public interface MedicoDAO {
 
 	public List<BNMedico> getListaMedicos() throws Exception;
+
 	public List<BNMedico> getMedicosPorEspecialidad(String idEspecialidad) throws Exception;
+
 	public BNMedico getMedicoPorId(String idMedico) throws Exception;
+
+	public int guardar(BNMedico medico) throws Exception;
 }
