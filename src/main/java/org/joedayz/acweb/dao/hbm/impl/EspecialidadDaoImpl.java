@@ -13,6 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.joedayz.acweb.dao.EspecialidadDAO;
 import org.joedayz.acweb.domain.BNEspecialidad;
+import org.joedayz.acweb.util.HibernateUtil;
 
 /**
  *
@@ -23,12 +24,10 @@ public class EspecialidadDaoImpl implements EspecialidadDAO {
 	private SessionFactory sessionFactory;
 
 	public EspecialidadDaoImpl() {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-			this.sessionFactory = sessionFactory;
+			this.sessionFactory = HibernateUtil.getSessionFactory();
 		} catch (Exception e) {
-			StandardServiceRegistryBuilder.destroy(registry);
+			System.out.println("Error al obtener la sesion");
 		}
 
 	}
@@ -51,7 +50,7 @@ public class EspecialidadDaoImpl implements EspecialidadDAO {
 		System.out.println("MEDICO");
 		List result = session.createQuery(
 				"select e from BNEspecialidad as e inner join BNMedico as m on m.especialidad=e.coEspecialidad where m.coMedico = :idMedico")
-				.setParameter("idMedico", idMedico).list();
+				.setParameter("idMedico", new Long(idMedico)).list();
 		for (BNEspecialidad e : (List<BNEspecialidad>) result) {
 			System.out.println("Especialidad: " + e.getDeEspecialidad());
 		}
