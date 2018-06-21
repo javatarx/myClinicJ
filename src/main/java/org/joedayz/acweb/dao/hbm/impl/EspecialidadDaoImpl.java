@@ -6,11 +6,9 @@
 package org.joedayz.acweb.dao.hbm.impl;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.joedayz.acweb.dao.EspecialidadDAO;
 import org.joedayz.acweb.domain.BNEspecialidad;
 import org.joedayz.acweb.util.HibernateUtil;
