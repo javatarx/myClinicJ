@@ -10,17 +10,19 @@ public class HibernateUtil {
 
 	private static SessionFactory sessionFactory;
 
-	private static SessionFactory buildSessionFactory() {
-		try {
-			final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+	private static synchronized SessionFactory buildSessionFactory() {
+		if (sessionFactory == null) {
+			try {
+				StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+				sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 
-			SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+			} catch (Throwable ex) {
+				System.err.println("Error al crear la session, " + ex);
+				throw new ExceptionInInitializerError(ex);
+			}
 
-			return sessionFactory;
-		} catch (Throwable ex) {
-			System.err.println("Error al crear la session, " + ex);
-			throw new ExceptionInInitializerError(ex);
 		}
+		return sessionFactory;
 	}
 
 	public static SessionFactory getSessionFactory() {
