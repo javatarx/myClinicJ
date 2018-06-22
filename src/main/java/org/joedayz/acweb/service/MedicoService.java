@@ -3,12 +3,12 @@ package org.joedayz.acweb.service;
 import java.util.List;
 
 import org.joedayz.acweb.dao.MedicoDAO;
-import org.joedayz.acweb.dao.daoFactory.DAOFactory;
+import org.joedayz.acweb.dao.factory.FactoryDAO;
 import org.joedayz.acweb.domain.BNMedico;
 
 public class MedicoService {
 
-	DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.H2);
+	FactoryDAO fabrica = FactoryDAO.getFactoryDAO(FactoryDAO.JDBC);
 	MedicoDAO medicoDAO = fabrica.getMedicoDAO();
 
 	public List<BNMedico> getListaMedicos() throws Exception {

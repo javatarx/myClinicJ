@@ -5,11 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.joedayz.acweb.dao.daoFactory.BaseDaoSupport;
+import org.joedayz.acweb.dao.factory.FactoryDaoJDBC;
 
 public class GeneradorId {
 
-	private static BaseDaoSupport daoSupport = new BaseDaoSupport();
 	
 	public static Long getId(String table,String columna){
 		Long id=(long)0;
@@ -17,7 +16,7 @@ public class GeneradorId {
 		Connection con = null;
 		ResultSet rs = null;
 		try {
-			con =  daoSupport.getConnexion();
+			con =  FactoryDaoJDBC.getConnexion();
 			
 			String sql = "select max("+columna+")+1 from "+table;
 			pstm = con.prepareStatement(sql);

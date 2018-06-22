@@ -17,17 +17,15 @@ import org.joedayz.acweb.dao.jdbc.impl.JdbcUsuarioDaoImpl;
 import org.joedayz.acweb.util.Constantes;
 
 public class FactoryDaoJDBC extends FactoryDAO {
-	private static Connection connection;
 
-	public static synchronized Connection getConnexion() throws SQLException {
-		if (connection == null) {
-			try {
-				Class.forName("org.h2.Driver");
-				connection = DriverManager.getConnection("jdbc:h2:/" + Constantes.directorioBaseDeDatos + "/myClinic",
-						"sa", "");
-			} catch (ClassNotFoundException e) {
-				System.out.println("Error de Conexion");
-			}
+	public static Connection getConnexion() throws SQLException {
+		Connection connection = null;
+		try {
+			Class.forName("org.h2.Driver");
+			connection = DriverManager.getConnection("jdbc:h2:/" + Constantes.directorioBaseDeDatos + "/myClinic", "sa",
+					"");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error de Conexion");
 		}
 		return connection;
 	}

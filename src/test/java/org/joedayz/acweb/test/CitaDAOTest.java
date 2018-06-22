@@ -1,8 +1,5 @@
 package org.joedayz.acweb.test;
 
-import static org.junit.Assert.assertEquals;
-
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,7 +9,7 @@ import org.joedayz.acweb.dao.CitaDAO;
 import org.joedayz.acweb.dao.EspecialidadDAO;
 import org.joedayz.acweb.dao.MedicoDAO;
 import org.joedayz.acweb.dao.UsuarioDAO;
-import org.joedayz.acweb.dao.daoFactory.DAOFactory;
+import org.joedayz.acweb.dao.factory.FactoryDAO;
 import org.joedayz.acweb.domain.BNCita;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +18,7 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class CitaDAOTest {
 
-	DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.H2);
+	FactoryDAO fabrica = FactoryDAO.getFactoryDAO(FactoryDAO.JDBC);
 	CitaDAO citaDAO = fabrica.getCitaDAO();
 	MedicoDAO medicoDAO = fabrica.getMedicoDAO();
 	UsuarioDAO usuarioDAO = fabrica.getUsuarioDAO();

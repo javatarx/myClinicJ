@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joedayz.acweb.dao.EspecialidadDAO;
-import org.joedayz.acweb.dao.daoFactory.BaseDaoSupport;
+import org.joedayz.acweb.dao.factory.FactoryDaoJDBC;
 import org.joedayz.acweb.domain.BNEspecialidad;
 
 public class JdbcEspecialidadDaoImpl implements EspecialidadDAO {
 
-	private BaseDaoSupport daoSupport = new BaseDaoSupport();
 	public int contador = 3;
 
 	public List<BNEspecialidad> getEspecialidades() throws Exception {
@@ -23,7 +22,7 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO {
 		List<BNEspecialidad> especialidades = new ArrayList<BNEspecialidad>();
 
 		try {
-			con = daoSupport.getConnexion();
+			con = FactoryDaoJDBC.getConnexion();
 
 			String sql = "select co_especialidad,de_especialidad,st_especialidad "
 					+ " from especialidad order by de_especialidad ASC ";
@@ -56,7 +55,7 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO {
 		List<BNEspecialidad> especialidades = new ArrayList<BNEspecialidad>();
 
 		try {
-			con = daoSupport.getConnexion();
+			con = FactoryDaoJDBC.getConnexion();
 
 			String sql = "select b.co_especialidad,b.de_especialidad,b.st_especialidad "
 					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad "
@@ -89,7 +88,7 @@ public class JdbcEspecialidadDaoImpl implements EspecialidadDAO {
 		BNEspecialidad especialidad = new BNEspecialidad();
 
 		try {
-			con = daoSupport.getConnexion();
+			con = FactoryDaoJDBC.getConnexion();
 
 			String sql = "select b.co_especialidad,b.de_especialidad,b.st_especialidad "
 					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad "

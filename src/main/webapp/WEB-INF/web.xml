@@ -27,7 +27,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>Medico</servlet-name>
-		<servlet-class>org.joedayz.acweb.web.Medico</servlet-class>
+		<servlet-class>org.joedayz.acweb.web.ServletMedico</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ServletLogin</servlet-name>
@@ -52,7 +52,7 @@
 		<description></description>
 		<display-name>Especialidad</display-name>
 		<servlet-name>Especialidad</servlet-name>
-		<servlet-class>org.joedayz.acweb.web.Especialidad</servlet-class>
+		<servlet-class>org.joedayz.acweb.web.ServletEspecialidad</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Especialidad</servlet-name>

@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joedayz.acweb.dao.MedicoDAO;
-import org.joedayz.acweb.dao.daoFactory.BaseDaoSupport;
+import org.joedayz.acweb.dao.factory.FactoryDaoJDBC;
 import org.joedayz.acweb.domain.BNEspecialidad;
 import org.joedayz.acweb.domain.BNMedico;
 
 public class JdbcMedicoDaoImpl implements MedicoDAO {
-	private BaseDaoSupport daoSupport = new BaseDaoSupport();
 	public int contador = 3;
 
 	public List<BNMedico> getListaMedicos() throws Exception {
@@ -23,7 +22,7 @@ public class JdbcMedicoDaoImpl implements MedicoDAO {
 		List<BNMedico> medicos = new ArrayList<BNMedico>();
 
 		try {
-			con = daoSupport.getConnexion();
+			con = FactoryDaoJDBC.getConnexion();
 
 			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "
 					+ " from medico a, especialidad b where a.co_especialidad = b.co_especialidad "
@@ -61,7 +60,7 @@ public class JdbcMedicoDaoImpl implements MedicoDAO {
 		List<BNMedico> medicos = new ArrayList<BNMedico>();
 
 		try {
-			con = daoSupport.getConnexion();
+			con = FactoryDaoJDBC.getConnexion();
 
 			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "
 					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad"
@@ -100,7 +99,7 @@ public class JdbcMedicoDaoImpl implements MedicoDAO {
 		BNMedico medico = new BNMedico();
 
 		try {
-			con = daoSupport.getConnexion();
+			con = FactoryDaoJDBC.getConnexion();
 
 			String sql = "select a.co_medico,a.de_medico,b.co_especialidad,b.de_especialidad "
 					+ " from medico a, especialidad b " + " where a.co_especialidad = b.co_especialidad"

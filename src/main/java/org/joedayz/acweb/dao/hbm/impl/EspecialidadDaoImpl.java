@@ -60,7 +60,7 @@ public class EspecialidadDaoImpl implements EspecialidadDAO {
 	public BNEspecialidad getEspecialidadPorId(String idEspecialidad) throws Exception {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		BNEspecialidad especialidad = session.load(BNEspecialidad.class, idEspecialidad);
+		BNEspecialidad especialidad = session.load(BNEspecialidad.class, new Long(idEspecialidad));
 		session.close();
 		return especialidad;
 	}
