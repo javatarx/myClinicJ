@@ -5,9 +5,21 @@ import org.joedayz.acweb.domain.BNCita;
 public class CitaEnEspera implements EstadoCita {
 	BNCita cita;
 
+	public CitaEnEspera() {
+	}
+
+	public BNCita getCita() {
+		return cita;
+	}
+
+	public void setCita(BNCita cita) {
+		this.cita = cita;
+		this.cita.setStCita(2);
+	}
+
 	public CitaEnEspera(BNCita cita) {
 		this.cita = cita;
-		this.cita.setStCita('2');
+		this.cita.setStCita(2);
 	}
 
 	public String getEstado() {

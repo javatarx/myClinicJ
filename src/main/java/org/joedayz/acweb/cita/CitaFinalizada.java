@@ -5,9 +5,21 @@ import org.joedayz.acweb.domain.BNCita;
 public class CitaFinalizada implements EstadoCita {
 	BNCita cita;
 
+	public CitaFinalizada() {
+	}
+
 	public CitaFinalizada(BNCita cita) {
 		this.cita = cita;
-		this.cita.setStCita('4');
+		this.cita.setStCita(4);
+	}
+
+	public BNCita getCita() {
+		return cita;
+	}
+
+	public void setCita(BNCita cita) {
+		this.cita = cita;
+		this.cita.setStCita(4);
 	}
 
 	public String getEstado() {

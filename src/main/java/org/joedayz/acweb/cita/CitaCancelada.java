@@ -6,9 +6,21 @@ public class CitaCancelada implements EstadoCita {
 
 	BNCita cita;
 
+	public CitaCancelada() {
+	}
+
 	public CitaCancelada(BNCita cita) {
 		this.cita = cita;
-		this.cita.setStCita('0');
+		this.cita.setStCita(0);
+	}
+
+	public BNCita getCita() {
+		return cita;
+	}
+
+	public void setCita(BNCita cita) {
+		this.cita = cita;
+		this.cita.setStCita(0);
 	}
 
 	public String getEstado() {

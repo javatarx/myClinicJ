@@ -38,6 +38,7 @@
 		<th>M&eacute;dico</th>
 		<th>Paciente</th>
 		<th>Comentario</th>
+		<th>Estado</th>
 		<th>Modificar</th>
 		<th>Eliminar</th>
 	</tr>
@@ -52,8 +53,17 @@
 		<td><c:out value="${cita.medico.deMedico}"></c:out></td>
 		<td><c:out value="${cita.usuario.nombres} ${cita.usuario.apellidos}"></c:out></td>
 		<td><c:out value="${cita.comentario}"></c:out></td>
-		<td align="center"><img src="images/iconos/modificar.png" onclick="location.href='<c:url value="ServletCita?tipo=U&idCita=${cita.coCita}"/>'"/></td>
-		<td align="center"><img src="images/iconos/eliminar.png" onclick="location.href='<c:url value="ServletCita?tipo=E&idCita=${cita.coCita}"/>'"/></td>
+		<td><c:out value="${cita.estado.estado}"></c:out></td>
+		<td align="center">
+			<c:if test="${cita.estado.puedeActualizar()}">
+				<img src="images/iconos/modificar.png" onclick="location.href='<c:url value="ServletCita?tipo=U&idCita=${cita.coCita}"/>'"/>
+			</c:if>
+		</td>
+		<td align="center">
+			<c:if test="${cita.estado.puedeCancelar()}">
+				<img src="images/iconos/eliminar.png" onclick="location.href='<c:url value="ServletCita?tipo=E&idCita=${cita.coCita}"/>'"/>
+			</c:if>
+		</td>
 	</tr>
 </c:when>
 <c:otherwise>

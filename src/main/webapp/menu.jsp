@@ -6,7 +6,7 @@
 <%BNUsuario usuario = (BNUsuario) request.getSession().getAttribute("usuario");%>
 
 <ul>
-    <li><a href="<%=url%>/ServletCita?list=lista">Mis Citas</a></li>
+    <li><a href="<%=url%>/ServletCita?list=lista">Citas</a></li>
         <% if (usuario.getDeRol().equalsIgnoreCase(Constantes.ADMIN)) {%>            
     <li><a href="<%=url%>/ServletUsuario?list=lista">Administraci&oacute;n</a></li>
     <li>

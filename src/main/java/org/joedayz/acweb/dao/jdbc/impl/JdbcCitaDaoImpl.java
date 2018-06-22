@@ -29,7 +29,8 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 
 			String sql = "select a.co_cita, a.fecha, a.horario, a.comentario, "
 					+ " b.co_medico, b.de_medico, c.co_especialidad, c.de_especialidad, "
-					+ " d.co_user, d.nombres, d.apellidos " + "from cita a, medico b, especialidad c, usuario d "
+					+ " d.co_user, d.nombres, d.apellidos, a.st_cita "
+					+ "from cita a, medico b, especialidad c, usuario d "
 					+ " where a.co_medico = b.co_medico and b.co_especialidad = c.co_especialidad "
 					+ " and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user and a.st_cita=? "
 					+ " order by a.fecha,a.horario ASC ";
@@ -57,6 +58,8 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 				usuario.setCoUser(rs.getLong(9));
 				usuario.setNombres(rs.getString(10));
 				usuario.setApellidos(rs.getString(11));
+
+				cita.setStCita(rs.getInt(12));
 
 				cita.setUsuario(usuario);
 				cita.setMedico(medico);
@@ -96,7 +99,7 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 			pstm.setString(3, cita.getHorario());
 			pstm.setLong(4, cita.getMedico().getCoMedico());
 			pstm.setLong(5, cita.getUsuario().getCoUser());
-			pstm.setBoolean(6, true);
+			pstm.setInt(6, 1);
 			pstm.setLong(7, cita.getEspecialidad().getCoEspecialidad());
 			pstm.setString(8, cita.getComentario());
 
@@ -174,7 +177,8 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 
 			String sql = "select a.co_cita, a.fecha, a.horario, a.comentario, "
 					+ " b.co_medico, b.de_medico, c.co_especialidad, c.de_especialidad, "
-					+ " d.co_user, d.nombres, d.apellidos " + "from cita a, medico b, especialidad c, usuario d "
+					+ " d.co_user, d.nombres, d.apellidos, a.st_cita "
+					+ "from cita a, medico b, especialidad c, usuario d "
 					+ " where a.co_medico = b.co_medico and b.co_especialidad = c.co_especialidad "
 					+ " and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user"
 					+ " and a.co_usuario=? and a.st_cita =? order by a.fecha,a.horario ASC";
@@ -203,6 +207,8 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 				usuario.setCoUser(rs.getLong(9));
 				usuario.setNombres(rs.getString(10));
 				usuario.setApellidos(rs.getString(11));
+
+				cita.setStCita(rs.getInt(12));
 
 				cita.setUsuario(usuario);
 				cita.setMedico(medico);

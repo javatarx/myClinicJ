@@ -5,9 +5,21 @@ import org.joedayz.acweb.domain.BNCita;
 public class CitaRegistrada implements EstadoCita {
 	BNCita cita;
 
+	public CitaRegistrada() {
+	}
+
 	public CitaRegistrada(BNCita cita) {
 		this.cita = cita;
-		this.cita.setStCita('1');
+		this.cita.setStCita(1);
+	}
+
+	public BNCita getCita() {
+		return cita;
+	}
+
+	public void setCita(BNCita cita) {
+		this.cita = cita;
+		this.cita.setStCita(1);
 	}
 
 	public String getEstado() {
