@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.joedayz.acweb.dao.MedicoDAO;
-import org.joedayz.acweb.dao.impl.JdbcMedicoDaoImpl;
+import org.joedayz.acweb.dao.jdbc.impl.JdbcMedicoDaoImpl;
 import org.joedayz.acweb.domain.BNMedico;
 import org.junit.Test;
 import org.junit.runner.RunWith;

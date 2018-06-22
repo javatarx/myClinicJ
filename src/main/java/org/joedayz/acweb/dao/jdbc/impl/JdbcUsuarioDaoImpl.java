@@ -1,4 +1,4 @@
-package org.joedayz.acweb.dao.impl;
+package org.joedayz.acweb.dao.jdbc.impl;
 
 
 
@@ -137,7 +137,7 @@ public class JdbcUsuarioDaoImpl implements UsuarioDAO {
 
 		resultado = pstm.executeUpdate();
 		
-		//añadiendo el rol
+		//aï¿½adiendo el rol
 		sql = "insert into usuario_role (co_role_user,co_role,co_user,st_role_user) "+
 				" values(?,?,?,?)";
 		pstm = con.prepareStatement(sql);

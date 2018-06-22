@@ -1,4 +1,4 @@
-package org.joedayz.acweb.dao.impl;
+package org.joedayz.acweb.dao.jdbc.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

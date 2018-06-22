@@ -4,10 +4,10 @@ import org.joedayz.acweb.dao.CitaDAO;
 import org.joedayz.acweb.dao.EspecialidadDAO;
 import org.joedayz.acweb.dao.MedicoDAO;
 import org.joedayz.acweb.dao.UsuarioDAO;
-import org.joedayz.acweb.dao.impl.JdbcCitaDaoImpl;
-import org.joedayz.acweb.dao.impl.JdbcEspecialidadDaoImpl;
-import org.joedayz.acweb.dao.impl.JdbcMedicoDaoImpl;
-import org.joedayz.acweb.dao.impl.JdbcUsuarioDaoImpl;
+import org.joedayz.acweb.dao.jdbc.impl.JdbcCitaDaoImpl;
+import org.joedayz.acweb.dao.jdbc.impl.JdbcEspecialidadDaoImpl;
+import org.joedayz.acweb.dao.jdbc.impl.JdbcMedicoDaoImpl;
+import org.joedayz.acweb.dao.jdbc.impl.JdbcUsuarioDaoImpl;
 
 
 

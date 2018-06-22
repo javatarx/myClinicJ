@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.joedayz.acweb.dao.EspecialidadDAO;
 import org.joedayz.acweb.dao.hbm.impl.EspecialidadDaoImpl;
-import org.joedayz.acweb.dao.impl.JdbcEspecialidadDaoImpl;
+import org.joedayz.acweb.dao.jdbc.impl.JdbcEspecialidadDaoImpl;
 import org.joedayz.acweb.domain.BNEspecialidad;
 import org.junit.Test;
 import org.junit.runner.RunWith;
