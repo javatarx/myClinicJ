@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joedayz.acweb.cita.FactoryEstadoCita;
 import org.joedayz.acweb.dao.CitaDAO;
 import org.joedayz.acweb.dao.factory.FactoryDaoJDBC;
 import org.joedayz.acweb.domain.BNCita;
@@ -32,10 +33,10 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 					+ " d.co_user, d.nombres, d.apellidos, a.st_cita "
 					+ "from cita a, medico b, especialidad c, usuario d "
 					+ " where a.co_medico = b.co_medico and b.co_especialidad = c.co_especialidad "
-					+ " and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user and a.st_cita=? "
+					+ " and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user "
 					+ " order by a.fecha,a.horario ASC ";
 			pstm = con.prepareStatement(sql);
-			pstm.setBoolean(1, true);
+			// pstm.setBoolean(1, true);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				BNCita cita = new BNCita();
@@ -124,7 +125,7 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 			// String sql = "delete cita where co_cita = ?";
 			String sql = "update cita set st_cita=? where co_cita = ?";
 			pstm = con.prepareStatement(sql);
-			pstm.setBoolean(1, false);
+			pstm.setInt(1, FactoryEstadoCita.CANCELADO);
 			pstm.setString(2, idCita);
 
 			cont = pstm.executeUpdate();
@@ -244,7 +245,7 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 			pstm.setString(2, cita.getHorario());
 			pstm.setLong(3, cita.getMedico().getCoMedico());
 			pstm.setLong(4, cita.getUsuario().getCoUser());
-			pstm.setBoolean(5, true);
+			pstm.setInt(5, cita.getStCita());
 			pstm.setLong(6, cita.getEspecialidad().getCoEspecialidad());
 			pstm.setString(7, cita.getComentario());
 			pstm.setLong(8, cita.getCoCita());
@@ -270,13 +271,13 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 
 			String sql = "select a.co_cita, a.fecha, a.horario, a.comentario, "
 					+ " b.co_medico, b.de_medico, c.co_especialidad, c.de_especialidad, "
-					+ " d.co_user, d.nombres, d.apellidos " + "from cita a, medico b, especialidad c, usuario d "
+					+ " d.co_user, d.nombres, d.apellidos, a.st_cita "
+					+ "from cita a, medico b, especialidad c, usuario d "
 					+ " where a.co_medico = b.co_medico and b.co_especialidad = c.co_especialidad "
-					+ " and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user "
-					+ " and a.st_cita=? and a.co_cita=?";
+					+ " and a.co_especialidad = c.co_especialidad and a.co_usuario=d.co_user " + " and a.co_cita=?";
 			pstm = con.prepareStatement(sql);
-			pstm.setBoolean(1, true);
-			pstm.setLong(2, Long.parseLong(idCita));
+			// pstm.setBoolean(1, true);
+			pstm.setLong(1, Long.parseLong(idCita));
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				BNUsuario usuario = new BNUsuario();
@@ -298,6 +299,8 @@ public class JdbcCitaDaoImpl implements CitaDAO {
 				usuario.setCoUser(rs.getLong(9));
 				usuario.setNombres(rs.getString(10));
 				usuario.setApellidos(rs.getString(11));
+
+				cita.setStCita(rs.getInt(12));
 
 				cita.setUsuario(usuario);
 				cita.setMedico(medico);

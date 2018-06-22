@@ -66,6 +66,20 @@
 		<textarea rows="2" cols="25" name="comentario" id="comentario"><%=cita.getComentario()%></textarea>
 	</td>
 	</tr>
+	<c:if test="${tipo == 'U' }">
+	<tr>
+	<td><label class="labels">Estado</label></td>
+	<td>
+		<select name="estado">
+			<option value="0" <c:if test="${cita.stCita==0}">selected</c:if> >Cancelado</option>
+			<option value="1" <c:if test="${cita.stCita==1}">selected</c:if> >Registrado</option>
+			<option value="2" <c:if test="${cita.stCita==2}">selected</c:if> >En Espera</option>
+			<option value="3" <c:if test="${cita.stCita==3}">selected</c:if> >En Atencion</option>
+			<option value="4" <c:if test="${cita.stCita==4}">selected</c:if> >Finalizado</option>
+		</select>
+	</td>
+	</tr>
+	</c:if>
 	<tr>
 	<td colspan="2" align="center">
 		<input type="hidden" value='<c:out value="${tipo}"></c:out>' name="tipo">

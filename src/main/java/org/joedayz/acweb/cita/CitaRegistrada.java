@@ -27,11 +27,11 @@ public class CitaRegistrada implements EstadoCita {
 	}
 
 	public boolean puedeCancelar() {
-		return false;
+		return true;
 	}
 
 	public boolean puedeActualizar() {
-		return false;
+		return true;
 	}
 
 	public boolean puedeAtender() {
@@ -39,12 +39,10 @@ public class CitaRegistrada implements EstadoCita {
 	}
 
 	public void eliminarCita() {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void actualizarCita() {
-		// TODO Auto-generated method stub
 
 	}
 

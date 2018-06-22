@@ -8,7 +8,7 @@ import org.joedayz.acweb.domain.BNEspecialidad;
 
 public class EspecialidadService {
 
-	FactoryDAO fabrica = FactoryDAO.getFactoryDAO(FactoryDAO.HIBERNATE);
+	FactoryDAO fabrica = FactoryDAO.getFactoryDAO(FactoryDAO.JDBC);
 	EspecialidadDAO especialidadDAO = fabrica.getEspecialidadDAO();
 
 	public List<BNEspecialidad> getListaEspecialidades() throws Exception {

@@ -31,7 +31,7 @@ public class CitaEnEspera implements EstadoCita {
 	}
 
 	public boolean puedeActualizar() {
-		return false;
+		return true;
 	}
 
 	public boolean puedeAtender() {
