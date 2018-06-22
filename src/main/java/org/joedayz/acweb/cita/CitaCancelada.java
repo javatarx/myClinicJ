@@ -15,14 +15,24 @@ public class CitaCancelada implements EstadoCita {
 		return "CANCELADA";
 	}
 
-	public void eliminarCita(BNCita cita) {
-		// TODO Auto-generated method stub
-		
+	public void eliminarCita() {
+
 	}
 
-	public void actualizarCita(BNCita cita) {
-		// TODO Auto-generated method stub
-		
+	public void actualizarCita() {
+
+	}
+
+	public boolean puedeCancelar() {
+		return false;
+	}
+
+	public boolean puedeActualizar() {
+		return false;
+	}
+
+	public boolean puedeAtender() {
+		return false;
 	}
 
 }

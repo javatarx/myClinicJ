@@ -14,14 +14,25 @@ public class CitaFinalizada implements EstadoCita {
 		return "FINALIZADA";
 	}
 
-	public void eliminarCita(BNCita cita) {
-		// TODO Auto-generated method stub
-		
+	public boolean puedeCancelar() {
+		return false;
 	}
 
-	public void actualizarCita(BNCita cita) {
-		// TODO Auto-generated method stub
-		
+	public boolean puedeActualizar() {
+		return false;
 	}
 
+	public boolean puedeAtender() {
+		return false;
+	}
+
+	public void eliminarCita() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void actualizarCita() {
+		// TODO Auto-generated method stub
+
+	}
 }

@@ -14,12 +14,24 @@ public class CitaRegistrada implements EstadoCita {
 		return "REGISTRADA";
 	}
 
-	public void eliminarCita(BNCita cita) {
+	public boolean puedeCancelar() {
+		return false;
+	}
+
+	public boolean puedeActualizar() {
+		return false;
+	}
+
+	public boolean puedeAtender() {
+		return false;
+	}
+
+	public void eliminarCita() {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void actualizarCita(BNCita cita) {
+	public void actualizarCita() {
 		// TODO Auto-generated method stub
 
 	}
