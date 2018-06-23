@@ -120,11 +120,11 @@ public class ServletCita extends HttpServlet {
 			cita.setFecha(dateFormat.parse(fecha));
 			cita.setHorario(horario);
 			cita.setComentario(comentario);
-			cita.setStCita(new Integer(estado));
 
 			if ("I".equals(tipo)) {
 				cont = servicio.registrarCita(cita);
 			} else if ("U".equals(tipo)) {
+				cita.setStCita(new Integer(estado));
 				String idCita = request.getParameter("idCita");
 				cita.setCoCita(Long.parseLong(idCita));
 				cont = servicio.actualizarCita(cita);
